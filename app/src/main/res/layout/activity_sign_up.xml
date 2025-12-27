@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:background="@drawable/background_account"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!--  White Card  -->
+    <LinearLayout
+        android:id="@+id/cardLogin"
+        android:layout_alignParentBottom="true"
+        android:padding="24dp"
+        android:orientation="vertical"
+        android:background="@drawable/bg_white_rounded"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
+
+            <ImageButton
+                android:scaleType="centerCrop"
+                android:id="@+id/btnBack"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@drawable/ic_arrow_back_ios_foreground"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="@string/go_back" />
+
+            <!-- Sign up -->
+            <TextView
+                android:layout_marginStart="80dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/sign_up"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                android:textColor="#27B1AF"
+                android:layout_gravity="center_horizontal"/>
+        </LinearLayout>
+
+        <!--  Username  -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/bg_input"
+            android:gravity="center_vertical"
+            android:padding="12dp">
+
+            <ImageView
+                android:contentDescription="@string/username_icon"
+                android:src="@drawable/ic_user_foreground"
+                android:layout_width="24dp"
+                android:layout_height="24dp"/>
+
+            <EditText
+                android:autofillHints="userName"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:hint="@string/username"
+                android:layout_marginStart="12dp"
+                android:background="@null"
+                android:inputType="textEmailAddress"/>
+        </LinearLayout>
+
+        <!-- Email -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/bg_input"
+            android:gravity="center_vertical"
+            android:padding="12dp">
+
+            <ImageView
+                android:contentDescription="@string/email_icon"
+                android:src="@drawable/ic_email_foreground"
+                android:layout_width="24dp"
+                android:layout_height="24dp"/>
+
+            <EditText
+                android:autofillHints="emailAddress"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:hint="@string/email"
+                android:layout_marginStart="12dp"
+                android:background="@null"
+                android:inputType="textEmailAddress"/>
+        </LinearLayout>
+
+        <!-- Password -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/bg_input"
+            android:gravity="center_vertical"
+            android:padding="12dp">
+
+            <ImageView
+                android:contentDescription="@string/password"
+                android:src="@drawable/ic_lock"
+                android:layout_width="24dp"
+                android:layout_height="24dp"/>
+
+            <EditText
+                android:id="@+id/etPassword"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_weight="1"
+                android:hint="@string/password"
+                android:background="@null"
+                android:inputType="textPassword"
+                android:layout_marginStart="12dp"
+                android:autofillHints="password"/>
+
+            <ImageView
+                android:contentDescription="@string/show_password"
+                android:id="@+id/btnShowPassword"
+                android:src="@drawable/ic_eye"
+                android:layout_width="24dp"
+                android:layout_height="24dp"/>
+        </LinearLayout>
+
+        <!-- Confirm Password -->
+        <LinearLayout
+            android:layout_marginBottom="40dp"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/bg_input"
+            android:gravity="center_vertical"
+            android:padding="12dp">
+
+            <ImageView
+                android:contentDescription="@string/password"
+                android:src="@drawable/ic_lock"
+                android:layout_width="24dp"
+                android:layout_height="24dp"/>
+
+            <EditText
+                android:id="@+id/etConfirmPassword"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_weight="1"
+                android:hint="@string/confirm_password"
+                android:background="@null"
+                android:inputType="textPassword"
+                android:layout_marginStart="12dp"
+                android:autofillHints="password"/>
+
+            <ImageView
+                android:contentDescription="@string/show_password"
+                android:id="@+id/btnShowConfirmPassword"
+                android:src="@drawable/ic_eye"
+                android:layout_width="24dp"
+                android:layout_height="24dp"/>
+        </LinearLayout>
+
+        <!-- Login Button -->
+        <Button
+            android:id="@+id/btnLogin"
+            android:layout_marginBottom="100dp"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginTop="24dp"
+            android:text="@string/sign_up"
+            android:textAllCaps="false"
+            android:textSize="18sp"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="#27B1AF"/>
+    </LinearLayout>
+</RelativeLayout>

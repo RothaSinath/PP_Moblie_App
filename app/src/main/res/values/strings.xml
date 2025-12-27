@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">Project_Praticum</string>
+    <string name="welcome_back">Welcome Back</string>
+    <String name="email_icon">email icon</String>
+    <string name="email_icon">Email Icon</string>
+    <string name="login_to_your_account">Login to your account</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="forget_password">Forget Password?</string>
+    <string name="log_in">Log in</string>
+    <string name="or_login_with">Or login with</string>
+    <string name="show_password">Show password</string>
+    <string name="facebook_login">Facebook Login</string>
+    <string name="google_login">Google Login</string>
+    <string name="apple_login">Apple Login</string>
+    <string name="sign_up">Sign up</string>
+    <string name="go_back">Go back</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="username_icon">username icon</string>
+    <string name="username">Username</string>
+    <string name="back">Back</string>
+    <string name="account">Account</string>
+</resources>

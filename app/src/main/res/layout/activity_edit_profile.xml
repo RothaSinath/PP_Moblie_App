@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <!-- Back + Title -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:contentDescription="btnback"
+                android:id="@+id/btnBack"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_arrow_back_ios_foreground"
+                android:layout_alignParentStart="true"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Profile"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:layout_centerHorizontal="true"/>
+        </RelativeLayout>
+
+        <!--  Profile Image  -->
+        <FrameLayout
+            android:layout_gravity="center"
+            android:layout_marginTop="24dp"
+            android:layout_width="120dp"
+            android:layout_height="120dp">
+
+            <ImageView
+                android:contentDescription="image_profile"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/profile"
+                android:scaleType="centerCrop"
+                android:background="@drawable/bg_white_rounded"/>
+
+            <ImageView
+                android:contentDescription="camera"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:src="@drawable/ic_camera"
+                android:layout_gravity="bottom|end"/>
+        </FrameLayout>
+
+        <!--  Name  -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Name"
+            android:textStyle="bold"
+            android:textSize="15sp"
+            android:layout_marginTop="24dp"/>
+
+        <EditText
+            android:inputType="text"
+            android:layout_marginTop="10dp"
+            android:padding="12dp"
+            android:text="Roby To"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/bg_input"/>
+
+        <!--  Email  -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Email"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:layout_marginTop="16dp"/>
+
+        <EditText
+            android:inputType="textEmailAddress"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/bg_input"
+            android:drawableStart="@drawable/ic_email_foreground"
+            android:drawablePadding="10dp"
+            android:padding="12dp"
+            android:text="robyto@gmail.com"/>
+
+        <!-- Password -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Password"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:layout_marginTop="16dp"/>
+
+        <EditText
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/bg_input"
+            android:drawableStart="@drawable/ic_lock"
+            android:drawableEnd="@drawable/ic_eye"
+            android:padding="12dp"
+            android:inputType="textPassword"
+            android:hint="Password" />
+
+
+        <!-- Save Button -->
+        <Button
+            android:id="@+id/btnSave"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_marginTop="140dp"
+            android:text="Save"
+            android:textStyle="bold"
+            android:textColor="@android:color/white"
+            android:background="@drawable/bg_menu_profile"/>
+    </LinearLayout>
+</ScrollView>
