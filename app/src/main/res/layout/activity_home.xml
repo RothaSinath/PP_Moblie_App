@@ -1,0 +1,120 @@
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/topHeader"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:padding="20dp"
+        android:background="@drawable/bg_home_header"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.22">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/profile_picture"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:src="@drawable/profile"
+            android:scaleType="centerCrop"
+            app:shapeAppearanceOverlay="@style/CircleImage"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Space
+            android:layout_width="4dp"
+            android:layout_height="0dp"
+            android:id="@+id/space_1"
+            app:layout_constraintStart_toEndOf="@id/profile_picture"
+            app:layout_constraintEnd_toStartOf="@id/profile_name"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <TextView
+            android:text="Hi, Angkeavuth"
+            android:id="@+id/profile_name"
+            android:textSize="18sp"
+            android:textColor="@android:color/white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toEndOf="@id/space_1"
+            app:layout_constraintTop_toTopOf="@id/profile_picture" />
+
+        <TextView
+            android:text="Phnom Penh"
+            android:id="@+id/profile_location"
+            android:textSize="18sp"
+            android:textColor="#CFF8F4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toEndOf="@id/space_1"
+            app:layout_constraintBottom_toBottomOf="@id/profile_picture" />
+
+        <ImageView
+            android:id="@+id/profile_favorite"
+            android:src="@drawable/ic_favorite"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:padding="8dp"
+            app:layout_constraintEnd_toStartOf="@id/profile_notification"
+            app:layout_constraintTop_toTopOf="@+id/profile_picture"
+            app:layout_constraintBottom_toBottomOf="@id/profile_picture" />
+
+        <ImageView
+            android:id="@+id/profile_notification"
+            android:src="@drawable/ic_notification"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:padding="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/profile_picture"
+            app:layout_constraintBottom_toBottomOf="@id/profile_picture" />
+        
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="8dp"
+            android:id="@+id/space_2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/profile_picture" />
+
+        
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/profile_filter_container"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            app:cardCornerRadius="24dp"
+            app:cardBackgroundColor="#17858A"
+            app:cardElevation="0dp"
+            app:strokeWidth="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/space_2">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/profile_filter"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="8dp"
+                android:src="@drawable/ic_filter"
+                android:scaleType="centerInside"
+                app:shapeAppearanceOverlay="@style/CircleImage" />
+
+        </com.google.android.material.card.MaterialCardView>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <include
+        android:id="@+id/bottomNav"
+        layout="@layout/navigation"
+        android:layout_width="0dp"
+        android:layout_height="75dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
