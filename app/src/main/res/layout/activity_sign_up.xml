@@ -1,39 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
-    android:background="@drawable/background_account"
+    android:background="@drawable/bg_white_rounded"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <!--  White Card  -->
     <LinearLayout
         android:id="@+id/cardLogin"
-        android:layout_alignParentBottom="true"
         android:padding="24dp"
         android:orientation="vertical"
-        android:background="@drawable/bg_white_rounded"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <LinearLayout
             android:orientation="horizontal"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <ImageButton
-                android:scaleType="centerCrop"
-                android:id="@+id/btnBack"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:src="@drawable/ic_arrow_back_ios_foreground"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:contentDescription="@string/go_back" />
-
-            <!-- Sign up -->
             <TextView
-                android:layout_marginStart="80dp"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="center"
                 android:text="@string/sign_up"
                 android:textSize="30sp"
                 android:textStyle="bold"

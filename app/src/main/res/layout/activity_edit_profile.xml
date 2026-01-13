@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_height="match_parent"
     android:background="#FFFFFF">
 
@@ -18,8 +19,8 @@
             <ImageView
                 android:contentDescription="btnback"
                 android:id="@+id/btnBack"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
                 android:src="@drawable/ic_arrow_back_ios_foreground"
                 android:layout_alignParentStart="true"/>
 
@@ -66,7 +67,7 @@
 
         <EditText
             android:inputType="text"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="8dp"
             android:padding="12dp"
             android:text="Roby To"
             android:layout_width="match_parent"
@@ -80,11 +81,11 @@
             android:text="Email"
             android:textSize="15sp"
             android:textStyle="bold"
-            android:layout_marginTop="16dp"/>
+            android:layout_marginTop="12dp"/>
 
         <EditText
             android:inputType="textEmailAddress"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="8dp"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:background="@drawable/bg_input"
@@ -100,10 +101,10 @@
             android:text="Password"
             android:textSize="15sp"
             android:textStyle="bold"
-            android:layout_marginTop="16dp"/>
+            android:layout_marginTop="12dp"/>
 
         <EditText
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="8dp"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:background="@drawable/bg_input"
@@ -113,16 +114,38 @@
             android:inputType="textPassword"
             android:hint="Password" />
 
+        <EditText
+            android:layout_marginTop="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/bg_input"
+            android:drawableStart="@drawable/ic_lock"
+            android:drawableEnd="@drawable/ic_eye"
+            android:padding="12dp"
+            android:inputType="textPassword"
+            android:hint="Confirm Password" />
+    </LinearLayout>
 
-        <!-- Save Button -->
-        <Button
+    <!-- Save Button -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_alignParentBottom="true"
+        android:paddingVertical="20dp"
+        android:paddingHorizontal="40dp"
+        android:background="#D9D9D9">
+
+        <TextView
             android:id="@+id/btnSave"
             android:layout_width="match_parent"
-            android:layout_height="55dp"
-            android:layout_marginTop="140dp"
+            android:layout_height="50dp"
             android:text="Save"
+            android:gravity="center"
             android:textStyle="bold"
+            android:textSize="22dp"
             android:textColor="@android:color/white"
             android:background="@drawable/bg_menu_profile"/>
+
     </LinearLayout>
-</ScrollView>
+    
+</RelativeLayout>
