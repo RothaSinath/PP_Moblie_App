@@ -50,7 +50,7 @@
             android:textSize="14sp" />
 
         <TextView
-            android:id="@+id/txtSignUp"
+            android:id="@+id/TxtSignUp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Sign up"
@@ -59,15 +59,4 @@
             android:textSize="14sp" />
     </LinearLayout>
 
-    <!-- Continue as guest -->
-    <TextView
-        android:id="@+id/txtGuest"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Continue as guest"
-        android:textColor="#FFFFFF"
-        android:textSize="14sp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="24dp"/>
 </RelativeLayout>
