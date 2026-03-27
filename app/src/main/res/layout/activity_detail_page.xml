@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#17696e">
+
+    <LinearLayout
+        android:id="@+id/imgProduce"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/btnClose"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:src="@drawable/ic_close_foreground"
+                android:layout_alignParentStart="true"/>
+
+            <ImageView
+                android:id="@+id/btnFavorite"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:src="@drawable/ic_favorite"
+                android:layout_alignParentEnd="true"/>
+
+        </RelativeLayout>
+
+        <FrameLayout
+            android:layout_gravity="center"
+            android:layout_width="263dp"
+            android:layout_height="263dp">
+
+            <ImageView
+                android:id="@+id/imgProduceDetail"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/plant_detail"/>
+
+        </FrameLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_below="@id/imgProduce"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_detail_info">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:padding="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:textColor="#20a9ac"
+                android:textStyle="bold"
+                android:textSize="32sp"
+                android:text="Cactus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:textColor="#818181"
+                android:textSize="12dp"
+                android:text="Indoor Plant"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:layout_marginVertical="10dp"
+                android:textSize="16dp"
+                android:text="Description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:layout_marginRight="10dp"
+                android:textColor="#818181"
+                android:textSize="11sp"
+                android:text="Cacti are a group of plants adapted to arid environments. They typically have thick, fleshy stems that store water, and most species lack true leaves, reducing water loss. Many cacti have spines for protection and produce stunning flowers. They thrive in deserts and are popular in drought-tolerant landscaping."
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <RelativeLayout
+                android:orientation="horizontal"
+                android:layout_marginTop="60dp"
+                android:layout_width="match_parent"
+                android:layout_height="50dp">
+                <LinearLayout
+                    android:layout_alignParentStart="true"
+                    android:orientation="vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:textSize="14dp"
+                        android:text="Price :"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="$ 5.75"
+                        android:textSize="24dp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <Button
+                    android:textStyle="normal"
+                    android:textSize="18sp"
+                    android:text="Add to Cart"
+                    android:backgroundTint="#20a9ac"
+                    android:layout_alignParentEnd="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"/>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>
