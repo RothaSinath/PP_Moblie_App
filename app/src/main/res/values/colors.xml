@@ -3,4 +3,10 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="teal">#20A9AC</color>
+    <color name="dark_teal">#17696E</color>
+    <color name="light_teal">#BEE7E6</color>
+    <color name="light_red">#FBB5B5</color>
+    <color name="active_navigation">#17696E</color>
+    <color name="inactive_navigation">#909090</color>
+    <color name="yellow">#E4C647</color>
 </resources>

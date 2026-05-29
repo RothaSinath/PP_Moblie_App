@@ -21,7 +21,9 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".AccountActivity"/>
+        <activity android:name=".StartUpActivity" android:exported="true"/>
+
+        <activity android:name=".MainActivity" android:exported="true"/>
 
     </application>
 

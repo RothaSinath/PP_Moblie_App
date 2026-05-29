@@ -15,7 +15,7 @@ class LoadingActivity : AppCompatActivity() {
 
         lifecycleScope.launch {
             delay(1500)
-            startActivity(Intent(this@LoadingActivity, AccountActivity::class.java))
+            startActivity(Intent(this@LoadingActivity, StartUpActivity::class.java))
             finish()
         }
     }
