@@ -1,4 +1,4 @@
-package com.example.yourapp
+package com.example.project_praticum
 
 import android.content.Context
 import android.util.AttributeSet
@@ -7,54 +7,39 @@ import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.RelativeLayout
 import android.widget.TextView
-import androidx.annotation.DrawableRes
-import com.example.project_praticum.R
-import com.google.android.material.card.MaterialCardView
 
 class PlantCardViewSpecialOffer @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
-) : MaterialCardView(context, attrs, defStyleAttr) {
+) : RelativeLayout(context, attrs, defStyleAttr) {
 
     private val imgPlant: ImageView
-
     private val imgCategory: ImageView
-    private val txtCategory: TextView
     private val txtName: TextView
-    private val txtOldPrice: TextView
+    private val txtCategory: TextView
     private val txtNewPrice: TextView
+    private val txtRating: TextView
+    private val txtRatingCount: TextView
     private val btnAdd: ImageButton
+    private val btnFavorite: ImageView
 
     init {
-        radius = dpToPx(28f)
-        cardElevation = dpToPx(6f)
-        setCardBackgroundColor(resources.getColor(R.color.dark_teal, null))
-        useCompatPadding = true
-
-        val root = RelativeLayout(context).apply {
-            layoutParams = RelativeLayout.LayoutParams(
-                LayoutParams.MATCH_PARENT,
-                LayoutParams.MATCH_PARENT
-            )
-        }
-
-        LayoutInflater.from(context).inflate(R.layout.card_special_offer, root, true)
-        addView(root)
+        LayoutInflater.from(context).inflate(
+            R.layout.view_plant_card_special_offer,
+            this,
+            true
+        )
 
         imgPlant = findViewById(R.id.imgPlant)
         imgCategory = findViewById(R.id.imgCategory)
-        txtCategory = findViewById(R.id.txtCategory)
         txtName = findViewById(R.id.txtName)
-        txtOldPrice = findViewById(R.id.txtOldPrice)
+        txtCategory = findViewById(R.id.txtCategory)
         txtNewPrice = findViewById(R.id.txtNewPrice)
+        txtRating = findViewById(R.id.rating)
+        txtRatingCount = findViewById(R.id.number_of_rating)
         btnAdd = findViewById(R.id.btnAdd)
-
-        txtOldPrice.paintFlags = txtOldPrice.paintFlags or android.graphics.Paint.STRIKE_THRU_TEXT_FLAG
-    }
-
-    private fun dpToPx(dp: Float): Float {
-        return dp * resources.displayMetrics.density
+        btnFavorite = findViewById(R.id.btnFavorite)
     }
 
     fun setPlantName(name: String) {
@@ -65,24 +50,31 @@ class PlantCardViewSpecialOffer @JvmOverloads constructor(
         txtCategory.text = category
     }
 
-    fun setOldPrice(oldPrice: String) {
-        txtOldPrice.text = oldPrice
-    }
-
-    fun setNewPrice(newPrice: String) {
-        txtNewPrice.text = newPrice
-    }
-
-    fun setPlantImage(@DrawableRes imageRes: Int) {
-        imgPlant.setImageResource(imageRes)
-    }
-
-    fun setCategoryImage(@DrawableRes imageRes: Int) {
+    fun setCategoryImage(imageRes: Int) {
         imgCategory.setImageResource(imageRes)
     }
 
+    fun setPlantImage(imageRes: Int) {
+        imgPlant.setImageResource(imageRes)
+    }
+
+    fun setNewPrice(price: String) {
+        txtNewPrice.text = price
+    }
+
+    fun setRating(rating: String) {
+        txtRating.text = rating
+    }
+
+    fun setRatingCount(count: String) {
+        txtRatingCount.text = count
+    }
 
     fun setOnAddClickListener(listener: OnClickListener) {
         btnAdd.setOnClickListener(listener)
+    }
+
+    fun setOnFavoriteClickListener(listener: OnClickListener) {
+        btnFavorite.setOnClickListener(listener)
     }
 }

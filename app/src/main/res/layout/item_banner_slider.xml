@@ -1,12 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingHorizontal="16dp">
+    app:cardCornerRadius="18dp"
+    app:cardElevation="0dp"
+    app:strokeWidth="0dp">
 
     <ImageView
         android:id="@+id/image_banner_item"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scaleType="centerCrop"
-        android:background="@drawable/bg_navigation" /> </FrameLayout>
+        android:adjustViewBounds="true"
+        android:scaleType="fitXY"
+        android:src="@drawable/banner_1" />
+
+</com.google.android.material.card.MaterialCardView>

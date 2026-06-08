@@ -114,41 +114,41 @@
             android:backgroundTint="#27B1AF"/>
 
         <!-- Divider -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/or_login_with"
-            android:textColor="#AAAAAA"
-            android:layout_marginTop="24dp"
-            android:layout_gravity="center_horizontal"/>
+<!--        <TextView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_gravity="center_horizontal"-->
+<!--            android:layout_marginTop="24dp"-->
+<!--            android:text="@string/or_login_with"-->
+<!--            android:textColor="#AAAAAA" />-->
 
-         <!--  Social Icons  -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:layout_marginTop="16dp">
+        <!--  Social Icons  -->
+<!--        <LinearLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:gravity="center"-->
+<!--            android:layout_marginTop="16dp">-->
 
-            <ImageView
-                android:contentDescription="@string/facebook_login"
-                android:src="@drawable/ic_facebook"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_margin="12dp"/>
+<!--            <ImageView-->
+<!--                android:contentDescription="@string/facebook_login"-->
+<!--                android:src="@drawable/ic_facebook"-->
+<!--                android:layout_width="40dp"-->
+<!--                android:layout_height="40dp"-->
+<!--                android:layout_margin="12dp"/>-->
 
-            <ImageView
-                android:contentDescription="@string/google_login"
-                android:src="@drawable/ic_google"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_margin="12dp"/>
+<!--            <ImageView-->
+<!--                android:contentDescription="@string/google_login"-->
+<!--                android:src="@drawable/ic_google"-->
+<!--                android:layout_width="40dp"-->
+<!--                android:layout_height="40dp"-->
+<!--                android:layout_margin="12dp"/>-->
 
-            <ImageView
-                android:contentDescription="@string/apple_login"
-                android:src="@drawable/ic_apple"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_margin="12dp"/>
-        </LinearLayout>
+<!--            <ImageView-->
+<!--                android:contentDescription="@string/apple_login"-->
+<!--                android:src="@drawable/ic_apple"-->
+<!--                android:layout_width="40dp"-->
+<!--                android:layout_height="40dp"-->
+<!--                android:layout_margin="12dp"/>-->
+<!--        </LinearLayout>-->
     </LinearLayout>
 </RelativeLayout>
