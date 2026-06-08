@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#ffffff"
+    android:padding="16dp">
+
+    <!-- Top Bar -->
+    <LinearLayout
+        android:id="@+id/headerLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="32dp"
+        android:background="@android:color/white">
+
+        <ImageButton
+            android:id="@+id/btnBack"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/back"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_arrow_back_ios_foreground"
+            app:tint="#000000" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/iconLocation"
+            android:layout_width="28dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="12dp"
+            android:scaleType="centerInside"
+            android:contentDescription="@string/delivery_icon"
+            android:src="@drawable/ic_location_foreground"
+            app:tint="#222222" />
+
+        <TextView
+            android:id="@+id/txtTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="@string/delivery_address"
+            android:textColor="#222222"
+            android:textSize="22sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <!--  4 TextFeild  -->
+
+    <LinearLayout
+        android:id="@+id/formLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/headerLayout"
+        android:orientation="vertical">
+        <EditText
+            android:id="@+id/etName"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/bg_rounded_input_delivery_address"
+            android:hint="Name"
+            android:inputType="textPersonName"
+            android:paddingHorizontal="16dp"
+            android:textColor="#222222"
+            android:textColorHint="#B0B0B0" />
+        <EditText
+            android:id="@+id/etPhoneNumber"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/bg_rounded_input_delivery_address"
+            android:hint="Phone number"
+            android:inputType="phone"
+            android:paddingHorizontal="16dp"
+            android:textColor="#222222"
+            android:textColorHint="#B0B0B0" />
+
+        <EditText
+            android:id="@+id/etHouseNumber"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/bg_rounded_input_delivery_address"
+            android:hint="House Number"
+            android:inputType="text"
+            android:paddingHorizontal="16dp"
+            android:textColor="#222222"
+            android:textColorHint="#B0B0B0" />
+        <EditText
+            android:id="@+id/etFloor"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginBottom="32dp"
+            android:background="@drawable/bg_rounded_input_delivery_address"
+            android:hint="Floor"
+            android:inputType="text"
+            android:paddingHorizontal="16dp"
+            android:textColor="#222222"
+            android:textColorHint="#B0B0B0" />
+    </LinearLayout>
+
+    <com.google.android.material.button.MaterialButton
+    android:id="@+id/btnContinue"
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    android:layout_below="@+id/formLayout"
+    android:text="Continue to payment"
+    android:textColor="#FFFFFF"
+    android:textSize="18sp"
+    app:backgroundTint="#20a9ac"
+    app:cornerRadius="12dp"/>
+
+</RelativeLayout>

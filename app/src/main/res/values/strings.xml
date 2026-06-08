@@ -19,4 +19,14 @@
     <string name="username">Username</string>
     <string name="back">Back</string>
     <string name="account">Account</string>
+    <string name="payment">Payment</string>
+    <string name="choose_a_payment_method">Choose a payment method</string>
+    <string name="aba_pay">ABA Pay</string>
+    <string name="wing_bank">Wing Bank</string>
+    <string name="credit_or_debit_card">Credit or Debit card</string>
+    <string name="visa">Visa</string>
+    <string name="pay">Pay</string>
+    <string name="mastercard">Mastercard</string>
+    <string name="delivery_icon">Delivery Icon</string>
+    <string name="delivery_address">Delivery address</string>
 </resources>

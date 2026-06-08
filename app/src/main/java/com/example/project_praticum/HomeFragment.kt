@@ -3,10 +3,14 @@ package com.example.project_praticum
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.example.yourapp.PlantCardView
 import com.example.yourapp.PlantCardViewSpecialOffer
@@ -19,6 +23,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     private val slideRunnable = object : Runnable {
         override fun run() {
             val adapter = sliderPager.adapter ?: return
+            if (adapter.itemCount == 0) return // Safety check
             val nextItem = (sliderPager.currentItem + 1) % adapter.itemCount
             sliderPager.currentItem = nextItem
             handler.postDelayed(this, 3000)
@@ -28,20 +33,22 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // ViewPager setup
+        // 1. ViewPager initialization
         sliderPager = view.findViewById(R.id.sliderPager)
 
         val images = listOf(
-            R.drawable.sell_1,
-            R.drawable.sell_2,
-            R.drawable.sell_3,
-            R.drawable.sell_4
+            R.drawable.banner_1,
+            R.drawable.banner_2,
+            R.drawable.banner_3,
+            R.drawable.banner_4
         )
 
-        sliderPager.adapter = SliderAdapter(images)
+        // 2. FIXED: Attach a custom Adapter so the images can render
+        sliderPager.adapter = BannerAdapter(images)
         sliderPager.orientation = ViewPager2.ORIENTATION_HORIZONTAL
         sliderPager.offscreenPageLimit = 1
 
+        // Plant Cards setup
         val card1 = view.findViewById<PlantCardViewSpecialOffer>(R.id.card1)
         val card2 = view.findViewById<PlantCardViewSpecialOffer>(R.id.card2)
         val card3 = view.findViewById<PlantCardViewSpecialOffer>(R.id.card3)
@@ -80,10 +87,29 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         handler.removeCallbacks(slideRunnable)
     }
 
+    // ================= 3. FIXED: ADD THE BANNER ADAPTER LAYER =================
+    private class BannerAdapter(private val imageList: List<Int>) :
+        RecyclerView.Adapter<BannerAdapter.BannerViewHolder>() {
+
+        class BannerViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+            val imageView: ImageView = view.findViewById(R.id.image_banner_item)
+        }
+
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BannerViewHolder {
+            val view = LayoutInflater.from(parent.context)
+                .inflate(R.layout.item_banner_slider, parent, false)
+            return BannerViewHolder(view)
+        }
+
+        override fun onBindViewHolder(holder: BannerViewHolder, position: Int) {
+            holder.imageView.setImageResource(imageList[position])
+        }
+
+        override fun getItemCount(): Int = imageList.size
+    }
+
     // ================= FILTER LOGIC =================
-
     private fun setupFilterSelection(view: View) {
-
         val filters = listOf(
             view.findViewById<TextView>(R.id.filter_all),
             view.findViewById<TextView>(R.id.filter_indoor),
@@ -95,24 +121,15 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         fun selectFilter(selected: TextView) {
             filters.forEach {
                 it.setBackgroundResource(R.drawable.bg_input)
-                it.setTextColor(
-                    ContextCompat.getColor(requireContext(), R.color.teal)
-                )
+                it.setTextColor(ContextCompat.getColor(requireContext(), R.color.teal))
             }
-
             selected.setBackgroundResource(R.drawable.bg_selected_input)
-            selected.setTextColor(
-                ContextCompat.getColor(requireContext(), android.R.color.white)
-            )
+            selected.setTextColor(ContextCompat.getColor(requireContext(), android.R.color.white))
         }
 
         filters.forEach { filter ->
-            filter.setOnClickListener {
-                selectFilter(filter)
-            }
+            filter.setOnClickListener { selectFilter(filter) }
         }
-
-        // Default selected filter
         selectFilter(filters.first())
     }
 }
