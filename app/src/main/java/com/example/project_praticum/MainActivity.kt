@@ -1,6 +1,8 @@
 package com.example.project_praticum
 
+import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -10,22 +12,20 @@ import androidx.fragment.app.Fragment
 
 class MainActivity : AppCompatActivity() {
 
-    // Icons
     private lateinit var iconHome: ImageView
     private lateinit var iconCart: ImageView
     private lateinit var iconPlant: ImageView
     private lateinit var iconAccount: ImageView
 
-    // Texts
     private lateinit var textHome: TextView
     private lateinit var textCart: TextView
     private lateinit var textPlant: TextView
     private lateinit var textAccount: TextView
 
-    // Fragments
+    private lateinit var btnScan: View
+
     private val homeFragment = HomeFragment()
     private val cartFragment = CartFragment()
-    private val scanFragment = ScanFragment()
     private val plantFragment = MyPlantFragment()
     private val accountFragment = AccountFragment()
 
@@ -38,7 +38,6 @@ class MainActivity : AppCompatActivity() {
         initViews()
         setupBottomNav()
 
-        // Default screen
         if (savedInstanceState == null) {
             loadFragment(homeFragment)
             setActiveNav(iconHome, textHome)
@@ -57,10 +56,11 @@ class MainActivity : AppCompatActivity() {
 
         iconAccount = findViewById(R.id.icon_account)
         textAccount = findViewById(R.id.text_account)
+
+        btnScan = findViewById(R.id.nav_scan)
     }
 
     private fun setupBottomNav() {
-
         findViewById<LinearLayout>(R.id.nav_home).setOnClickListener {
             loadFragment(homeFragment)
             setActiveNav(iconHome, textHome)
@@ -71,9 +71,8 @@ class MainActivity : AppCompatActivity() {
             setActiveNav(iconCart, textCart)
         }
 
-        findViewById<LinearLayout>(R.id.nav_scan).setOnClickListener {
-            loadFragment(scanFragment)
-            setActiveNav(null, null) // Scan has no active state
+        btnScan.setOnClickListener {
+            startActivity(Intent(this, ScanActivity::class.java))
         }
 
         findViewById<LinearLayout>(R.id.nav_my_plant).setOnClickListener {
@@ -91,22 +90,18 @@ class MainActivity : AppCompatActivity() {
         if (currentFragment == fragment) return
 
         currentFragment = fragment
+
         supportFragmentManager.beginTransaction()
             .replace(R.id.fragment_container, fragment)
             .commit()
     }
 
-    private fun setActiveNav(
-        activeIcon: ImageView?,
-        activeText: TextView?
-    ) {
+    private fun setActiveNav(activeIcon: ImageView?, activeText: TextView?) {
         val activeColor = ContextCompat.getColor(this, R.color.active_navigation)
         val inactiveColor = ContextCompat.getColor(this, R.color.inactive_navigation)
 
-        // Reset all
         resetNavColors(inactiveColor)
 
-        // Activate selected
         activeIcon?.setColorFilter(activeColor)
         activeText?.setTextColor(activeColor)
     }

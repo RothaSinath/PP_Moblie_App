@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="96dp"
+    android:layout_marginBottom="12dp"
+    app:cardBackgroundColor="#FFFFFF"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="1dp"
+    app:strokeColor="#24BFC4"
+    app:strokeWidth="1dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="10dp">
+
+        <ImageView
+            android:id="@+id/imgPlant"
+            android:layout_width="76dp"
+            android:layout_height="76dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_logo"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvPlantName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="8dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="Plant Name"
+            android:textColor="#111111"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/imgPlant"
+            app:layout_constraintTop_toTopOf="@id/imgPlant" />
+
+        <TextView
+            android:id="@+id/tvCategory"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="Indoor Plant"
+            android:textColor="#17696E"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="@id/tvPlantName"
+            app:layout_constraintStart_toStartOf="@id/tvPlantName"
+            app:layout_constraintTop_toBottomOf="@id/tvPlantName" />
+
+        <TextView
+            android:id="@+id/tvExpertTipStatus"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="No expert tip yet"
+            android:textColor="#777777"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="@id/tvPlantName"
+            app:layout_constraintStart_toStartOf="@id/tvPlantName"
+            app:layout_constraintTop_toBottomOf="@id/tvCategory" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>

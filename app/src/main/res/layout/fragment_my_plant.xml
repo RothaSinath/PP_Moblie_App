@@ -1,13 +1,125 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#F7F7F7">
 
     <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="My Plant"
+        android:textColor="#063F42"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/topActionRow"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Plant"
+        android:layout_height="42dp"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="14dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@id/tvTitle">
+
+        <LinearLayout
+            android:id="@+id/searchBox"
+            android:layout_width="0dp"
+            android:layout_height="32dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_selected_input"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp">
+
+            <ImageView
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:src="@drawable/ic_search" />
+
+            <EditText
+                android:id="@+id/edtSearchPlant"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="6dp"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:hint="Search plants"
+                android:singleLine="true"
+                android:textColor="#FFFFFF"
+                android:textColorHint="#FFFFFF"
+                android:textSize="12sp" />
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/btnWishlistPlant"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/bg_circle_teal"
+            android:padding="7dp"
+            android:src="@drawable/ic_favorite"
+            app:tint="#FFFFFF" />
+
+        <ImageView
+            android:id="@+id/btnMore"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/bg_circle_teal"
+            android:padding="7dp"
+            android:src="@drawable/more_horiz"
+            app:tint="#FFFFFF" />
+
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerMyPlants"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="12dp"
+        android:paddingStart="14dp"
+        android:paddingEnd="14dp"
+        android:clipToPadding="false"
+        app:layout_constraintBottom_toTopOf="@id/btnAddPlant"
+        app:layout_constraintTop_toBottomOf="@id/topActionRow" />
+
+    <TextView
+        android:id="@+id/tvEmptyPlant"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="No plants added yet"
+        android:textColor="#888888"
+        android:textSize="14sp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toTopOf="@id/btnAddPlant"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/topActionRow" />
+
+    <TextView
+        android:id="@+id/btnAddPlant"
+        android:layout_width="160dp"
+        android:layout_height="38dp"
+        android:layout_marginBottom="72dp"
+        android:background="@drawable/bg_circle_teal"
         android:gravity="center"
-        android:textSize="24sp"/>
+        android:text="+ Add plant"
+        android:textColor="#FFFFFF"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

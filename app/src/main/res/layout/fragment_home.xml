@@ -1,321 +1,388 @@
+<?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white">
+    android:background="#FFFFFF">
+
+    <!-- Fixed top nav/search, not inside AppBarLayout -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/topHeader"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:background="@drawable/bg_home_header"
+        android:elevation="8dp"
+        android:paddingStart="16dp"
+        android:paddingTop="12dp"
+        android:paddingEnd="16dp"
+        android:paddingBottom="16dp">
+
+        <LinearLayout
+            android:id="@+id/topUserRow"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/imgProfile"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/profile"
+                app:shapeAppearanceOverlay="@style/CircleImage" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="10dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvGreeting"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:text="Hi! Lion Heart"
+                    android:textColor="#FFFFFF"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/tvLocation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Your location"
+                    android:textColor="#CFF8F4"
+                    android:textSize="13sp" />
+
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/btnFavoritePage"
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:padding="8dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_favorite" />
+
+            <ImageView
+                android:id="@+id/btnNotification"
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:layout_marginStart="4dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:padding="8dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_notification" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/searchRow"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="14dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/topUserRow">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/bg_search_bar"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingStart="14dp"
+                android:paddingEnd="14dp">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_search"
+                    app:tint="#FFFFFF" />
+
+                <EditText
+                    android:id="@+id/edtSearch"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="8dp"
+                    android:layout_weight="1"
+                    android:background="@android:color/transparent"
+                    android:hint="Search plant"
+                    android:singleLine="true"
+                    android:textColor="#FFFFFF"
+                    android:textColorHint="#B7D3D3"
+                    android:textSize="15sp" />
+
+                <ImageView
+                    android:id="@+id/btnScan"
+                    android:layout_width="26dp"
+                    android:layout_height="26dp"
+                    android:src="@drawable/ic_scan" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@android:color/white"
+        android:layout_marginTop="150dp"
+        android:background="#D8FCFC"
         app:elevation="0dp">
 
+        <!-- Banner only collapses -->
         <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:id="@+id/collapsingHeader"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed|enterAlways|enterAlwaysCollapsed"
+            android:layout_height="230dp"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
             app:titleEnabled="false">
 
             <androidx.viewpager2.widget.ViewPager2
                 android:id="@+id/sliderPager"
                 android:layout_width="match_parent"
-                android:layout_height="220dp"
-                android:layout_marginTop="180dp"
-                android:clipToPadding="false"
+                android:layout_height="210dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="16dp"
                 android:clipChildren="false"
+                android:clipToPadding="false"
                 app:layout_collapseMode="parallax"
-                app:layout_collapseParallaxMultiplier="1.0" />
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/topHeader"
-                android:layout_width="match_parent"
-                android:layout_height="160dp"
-                android:padding="20dp"
-                android:background="@drawable/bg_home_header"
-                android:elevation="8dp"
-                app:layout_collapseMode="pin">
-
-                <com.google.android.material.imageview.ShapeableImageView
-                    android:id="@+id/profile_picture"
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:src="@drawable/profile"
-                    android:scaleType="centerCrop"
-                    app:shapeAppearanceOverlay="@style/CircleImage"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/profile_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Hi, Angkeavuth"
-                    android:textColor="@android:color/white"
-                    android:textSize="18sp"
-                    android:layout_marginStart="8dp"
-                    app:layout_constraintStart_toEndOf="@id/profile_picture"
-                    app:layout_constraintTop_toTopOf="@id/profile_picture" />
-
-                <TextView
-                    android:id="@+id/profile_location"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Phnom Penh"
-                    android:textColor="#CFF8F4"
-                    android:textSize="14sp"
-                    app:layout_constraintStart_toStartOf="@id/profile_name"
-                    app:layout_constraintBottom_toBottomOf="@id/profile_picture" />
-
-                <ImageView
-                    android:id="@+id/profile_favorite"
-                    android:src="@drawable/ic_favorite"
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:padding="8dp"
-                    app:layout_constraintEnd_toStartOf="@id/profile_notification"
-                    app:layout_constraintTop_toTopOf="@+id/profile_picture"
-                    app:layout_constraintBottom_toBottomOf="@id/profile_picture" />
-
-                <ImageView
-                    android:id="@+id/profile_notification"
-                    android:src="@drawable/ic_notification"
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:padding="8dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/profile_picture"
-                    app:layout_constraintBottom_toBottomOf="@id/profile_picture" />
-
-                <LinearLayout
-                    android:id="@+id/searchRow"
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:layout_marginTop="16dp"
-                    app:layout_constraintTop_toBottomOf="@id/profile_picture">
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1">
-                        <com.google.android.material.card.MaterialCardView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            app:cardCornerRadius="24dp"
-                            app:strokeWidth="0dp"
-                            app:cardBackgroundColor="#17858A"
-                            app:cardElevation="0dp"/>
-                        <ImageView
-                            android:id="@+id/profile_ic_search"
-                            android:layout_width="48dp"
-                            android:layout_height="48dp"
-                            android:padding="12dp"
-                            android:src="@drawable/ic_search"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintBottom_toBottomOf="parent"/>
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Search plant"
-                            android:textColor="#D1D1D1"
-                            app:layout_constraintStart_toEndOf="@id/profile_ic_search"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintBottom_toBottomOf="parent"/>
-                        <ImageView
-                            android:layout_width="48dp"
-                            android:layout_height="48dp"
-                            android:padding="12dp"
-                            android:src="@drawable/ic_scan"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintBottom_toBottomOf="parent"/>
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-                    <Space android:layout_width="8dp" android:layout_height="0dp"/>
-
-                    <com.google.android.material.card.MaterialCardView
-                        android:layout_width="48dp"
-                        android:layout_height="48dp"
-                        app:cardCornerRadius="24dp"
-                        app:cardBackgroundColor="#17858A"
-                        app:strokeWidth="0dp"
-                        app:cardElevation="0dp">
-                        <ImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:padding="12dp"
-                            android:src="@drawable/ic_filter"/>
-                    </com.google.android.material.card.MaterialCardView>
-                </LinearLayout>
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.appcompat.widget.Toolbar
-                android:layout_width="match_parent"
-                android:layout_height="160dp"
-                app:layout_collapseMode="pin" />
+                app:layout_collapseParallaxMultiplier="0.7" />
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
 
+        <!-- Filter stays after banner collapses -->
         <HorizontalScrollView
             android:id="@+id/filterBar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@android:color/white"
-            android:scrollbars="none"
-            android:fillViewport="true"
-            android:paddingTop="12dp">
+            android:background="#D8FCFC"
+            android:paddingTop="12dp"
+            android:paddingBottom="8dp"
+            android:scrollbars="none">
+
             <LinearLayout
+                android:id="@+id/filterContainer"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:paddingHorizontal="16dp">
-                <TextView android:id="@+id/filter_all" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="All" android:paddingHorizontal="24dp" android:background="@drawable/bg_input" android:layout_marginEnd="12dp"/>
-                <TextView android:id="@+id/filter_indoor" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Indoor" android:paddingHorizontal="24dp" android:background="@drawable/bg_input" android:layout_marginEnd="12dp"/>
-                <TextView android:id="@+id/filter_outdoor" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Outdoor" android:paddingHorizontal="24dp" android:background="@drawable/bg_input" android:layout_marginEnd="12dp"/>
-                <TextView android:id="@+id/filter_bigtree" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="BigTree" android:paddingHorizontal="24dp" android:background="@drawable/bg_input" android:layout_marginEnd="12dp"/>
-                <TextView android:id="@+id/filter_aquatic" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Aquatic" android:paddingHorizontal="24dp" android:background="@drawable/bg_input"/>
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp">
+
+                <TextView
+                    android:id="@+id/filter_all"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:background="@drawable/bg_selected_input"
+                    android:gravity="center"
+                    android:paddingStart="18dp"
+                    android:paddingEnd="18dp"
+                    android:text="All"
+                    android:textColor="#FFFFFF"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/filter_indoor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="10dp"
+                    android:background="@drawable/bg_input"
+                    android:gravity="center"
+                    android:paddingStart="18dp"
+                    android:paddingEnd="18dp"
+                    android:text="Indoor"
+                    android:textColor="#17696E" />
+
+                <TextView
+                    android:id="@+id/filter_outdoor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="10dp"
+                    android:background="@drawable/bg_input"
+                    android:gravity="center"
+                    android:paddingStart="18dp"
+                    android:paddingEnd="18dp"
+                    android:text="Outdoor"
+                    android:textColor="#17696E" />
+
+                <TextView
+                    android:id="@+id/filter_aquatic"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="10dp"
+                    android:background="@drawable/bg_input"
+                    android:gravity="center"
+                    android:paddingStart="18dp"
+                    android:paddingEnd="18dp"
+                    android:text="Aquatic"
+                    android:textColor="#17696E" />
+
+                <TextView
+                    android:id="@+id/filter_bigtree"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="10dp"
+                    android:background="@drawable/bg_input"
+                    android:gravity="center"
+                    android:paddingStart="18dp"
+                    android:paddingEnd="18dp"
+                    android:text="Big Tree"
+                    android:textColor="#17696E" />
+
             </LinearLayout>
+
         </HorizontalScrollView>
 
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.core.widget.NestedScrollView
+        android:id="@+id/homeScroll"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        android:id="@+id/see_more"
-        android:paddingTop="10dp">
+        android:clipChildren="false"
+        android:layout_marginBottom="150dp"
+        android:clipToPadding="false"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="bottom">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="16sp"
-                    android:text="Special Offer"
-                    android:textStyle="bold"
-                    android:textSize="28sp"/>
-                <Space
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"/>
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:paddingEnd="16dp"
-                    android:gravity="end">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:paddingVertical="16sp"
-                        android:text="See more"
-                        android:textColor="#838383"
-                        android:textSize="20sp"/>
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            android:orientation="vertical"
+            android:paddingBottom="24dp">
 
-                    <ImageView
-                        android:layout_width="28dp"
-                        android:layout_height="match_parent"
-                        android:src="@drawable/ic_arrow_forward_ios_foreground"
-                        app:tint="#838383" />
-                </LinearLayout>
+            <include
+                android:id="@+id/sectionSpecial"
+                layout="@layout/view_home_section" />
 
-            </LinearLayout>
+            <include
+                android:id="@+id/sectionPopular"
+                layout="@layout/view_home_section" />
 
-            <HorizontalScrollView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+            <include
+                android:id="@+id/sectionIndoor"
+                layout="@layout/view_home_section" />
 
-                    <HorizontalScrollView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:scrollbars="none"
-                        android:clipToPadding="false"
-                        android:paddingStart="16dp"
-                        android:paddingEnd="16dp">
+            <include
+                android:id="@+id/sectionOutdoor"
+                layout="@layout/view_home_section" />
 
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
+            <include
+                android:id="@+id/sectionAquatic"
+                layout="@layout/view_home_section" />
 
-                            <com.example.project_praticum.PlantCardViewSpecialOffer
-                                android:id="@+id/card1"
-                                android:layout_width="192dp"
-                                android:layout_height="272dp"
-                                android:layout_marginEnd="12dp" />
-
-                            <com.example.project_praticum.PlantCardViewSpecialOffer
-                                android:id="@+id/card2"
-                                android:layout_width="192dp"
-                                android:layout_height="272dp"
-                                android:layout_marginEnd="12dp" />
-
-                            <com.example.project_praticum.PlantCardViewSpecialOffer
-                                android:id="@+id/card3"
-                                android:layout_width="192dp"
-                                android:layout_height="272dp" />
-
-                        </LinearLayout>
-
-                    </HorizontalScrollView>
-
-                </LinearLayout>
-            </HorizontalScrollView>
+            <include
+                android:id="@+id/sectionBigTree"
+                layout="@layout/view_home_section" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="bottom">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="16sp"
-                    android:text="Indoor Plants"
-                    android:textStyle="bold"
-                    android:textSize="28sp"/>
-                <Space
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"/>
+                android:orientation="vertical"
+                android:background="@drawable/bg_home_gradient">
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
+                <RelativeLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:paddingEnd="16dp"
-                    android:gravity="end">
+                    android:paddingStart="16dp"
+                    android:paddingTop="18dp"
+                    android:paddingEnd="16dp">
+
+                    <TextView
+                        android:id="@+id/tvHelpTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="We are here to help!"
+                        android:textColor="#202020"
+                        android:textSize="24sp"
+                        android:textStyle="bold" />
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:paddingVertical="16sp"
-                        android:text="See more"
-                        android:textColor="#838383"
-                        android:textSize="20sp"/>
+                        android:layout_alignParentEnd="true"
+                        android:text="Explore more  >"
+                        android:textColor="#6B6B6B"
+                        android:textSize="16sp" />
 
-                    <ImageView
-                        android:layout_width="28dp"
-                        android:layout_height="match_parent"
-                        android:src="@drawable/ic_arrow_forward_ios_foreground"
-                        app:tint="#838383" />
-                </LinearLayout>
+                </RelativeLayout>
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/imgHelpBanner"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="16dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/banner_2"
+                    app:shapeAppearanceOverlay="@style/RoundedBannerImage" />
 
             </LinearLayout>
+
+            <TextView
+                android:id="@+id/btnMembership"
+                android:layout_width="match_parent"
+                android:layout_height="76dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="18dp"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/bg_input"
+                android:gravity="center_vertical"
+                android:paddingStart="18dp"
+                android:text="Membership\nDiscount 20% for every purchase."
+                android:textColor="#17696E"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/btnCoupons"
+                android:layout_width="match_parent"
+                android:layout_height="76dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/bg_input"
+                android:gravity="center_vertical"
+                android:paddingStart="18dp"
+                android:text="Free 5 coupons\nFor new user."
+                android:textColor="#17696E"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/btnDelivery"
+                android:layout_width="match_parent"
+                android:layout_height="76dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/bg_input"
+                android:gravity="center_vertical"
+                android:paddingStart="18dp"
+                android:text="Free delivery\nFor under 3km"
+                android:textColor="#17696E"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
         </LinearLayout>
+
     </androidx.core.widget.NestedScrollView>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

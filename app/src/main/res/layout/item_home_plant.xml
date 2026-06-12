@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="360dp"
+    android:layout_height="118dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginEnd="14dp"
+    android:clipChildren="false"
+    android:clipToPadding="false">
+
+    <!-- actual card -->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="92dp"
+        android:layout_gravity="bottom"
+        android:background="@drawable/bg_home_plant_card">
+
+        <!-- left curved area -->
+        <View
+            android:layout_width="116dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/bg_home_plant_image_area" />
+
+        <!-- right content -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingStart="124dp"
+            android:paddingTop="14dp"
+            android:paddingEnd="14dp"
+            android:paddingBottom="12dp">
+
+            <TextView
+                android:id="@+id/tvPlantName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cactus"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                tools:text="Cactus" />
+
+            <TextView
+                android:id="@+id/tvCategory"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvPlantName"
+                android:layout_marginTop="2dp"
+                android:text="🪴 Indoor Plant"
+                android:textColor="#B9D7D8"
+                android:textSize="11sp"
+                tools:text="🪴 Indoor Plant" />
+
+            <TextView
+                android:id="@+id/tvPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvCategory"
+                android:layout_marginTop="8dp"
+                android:text="5.75$"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp"
+                tools:text="5.75$" />
+
+            <ImageView
+                android:id="@+id/btnFavorite"
+                android:layout_width="26dp"
+                android:layout_height="26dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:contentDescription="Favorite"
+                android:src="@drawable/ic_favorite"
+                app:tint="#FFFFFF" />
+
+            <TextView
+                android:id="@+id/btnAdd"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentEnd="true"
+                android:background="@drawable/bg_circle_aqua"
+                android:gravity="center"
+                android:text="+"
+                android:textColor="#FFFFFF"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+        </RelativeLayout>
+    </FrameLayout>
+
+    <!-- plant image on top, outside card -->
+    <ImageView
+        android:id="@+id/imgPlant"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="start|top"
+        android:layout_marginStart="0dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/img_cactus"
+        android:translationY="4dp"
+        tools:src="@drawable/img_cactus" />
+
+</FrameLayout>

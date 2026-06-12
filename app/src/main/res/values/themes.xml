@@ -6,4 +6,12 @@
     </style>
 
     <style name="Theme.Project_Praticum" parent="Base.Theme.Project_Praticum" />
+    <style name="Theme.Project_Practicum" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">#27B1AF</item>
+        <item name="colorPrimaryVariant">#17858A</item>
+        <item name="colorOnPrimary">#FFFFFF</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:statusBarColor">#FFFFFF</item>
+        <item name="android:navigationBarColor">#FFFFFF</item>
+    </style>
 </resources>

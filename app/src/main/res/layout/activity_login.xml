@@ -5,7 +5,6 @@
     android:background="@drawable/bg_white_rounded"
     android:layout_height="match_parent">
 
-    <!--  White Card  -->
     <LinearLayout
         android:id="@+id/cardLogin"
         android:padding="24dp"
@@ -13,7 +12,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <!-- Welcome -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -21,7 +19,7 @@
             android:textSize="30sp"
             android:textStyle="bold"
             android:textColor="#27B1AF"
-            android:layout_gravity="center_horizontal"/>
+            android:layout_gravity="center_horizontal" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -30,9 +28,8 @@
             android:textSize="16sp"
             android:textColor="#AAAAAA"
             android:layout_marginTop="4dp"
-            android:layout_gravity="center_horizontal"/>
+            android:layout_gravity="center_horizontal" />
 
-        <!-- Email -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="56dp"
@@ -45,19 +42,19 @@
                 android:contentDescription="@string/email_icon"
                 android:src="@drawable/ic_email_foreground"
                 android:layout_width="24dp"
-                android:layout_height="24dp"/>
+                android:layout_height="24dp" />
 
             <EditText
+                android:id="@+id/etEmail"
                 android:autofillHints="emailAddress"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:hint="@string/email"
                 android:layout_marginStart="12dp"
                 android:background="@null"
-                android:inputType="textEmailAddress"/>
+                android:inputType="textEmailAddress" />
         </LinearLayout>
 
-        <!-- Password -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="56dp"
@@ -70,7 +67,7 @@
                 android:contentDescription="@string/password"
                 android:src="@drawable/ic_lock"
                 android:layout_width="24dp"
-                android:layout_height="24dp"/>
+                android:layout_height="24dp" />
 
             <EditText
                 android:id="@+id/etPassword"
@@ -81,17 +78,16 @@
                 android:background="@null"
                 android:inputType="textPassword"
                 android:layout_marginStart="12dp"
-                android:autofillHints="password"/>
+                android:autofillHints="password" />
 
             <ImageView
                 android:contentDescription="@string/show_password"
                 android:id="@+id/btnShowPassword"
                 android:src="@drawable/ic_eye"
                 android:layout_width="24dp"
-                android:layout_height="24dp"/>
+                android:layout_height="24dp" />
         </LinearLayout>
 
-        <!-- Forgot -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -99,9 +95,8 @@
             android:textColor="#27B1AF"
             android:textSize="14sp"
             android:layout_gravity="end"
-            android:layout_marginTop="8dp"/>
+            android:layout_marginTop="8dp" />
 
-        <!-- Login Button -->
         <Button
             android:id="@+id/btnLogin"
             android:layout_width="match_parent"
@@ -111,44 +106,15 @@
             android:textAllCaps="false"
             android:textSize="18sp"
             android:textColor="#FFFFFF"
-            android:backgroundTint="#27B1AF"/>
+            android:backgroundTint="#27B1AF" />
 
-        <!-- Divider -->
-<!--        <TextView-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_gravity="center_horizontal"-->
-<!--            android:layout_marginTop="24dp"-->
-<!--            android:text="@string/or_login_with"-->
-<!--            android:textColor="#AAAAAA" />-->
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginTop="16dp"
+            android:layout_gravity="center_horizontal"
+            android:visibility="gone" />
 
-        <!--  Social Icons  -->
-<!--        <LinearLayout-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:gravity="center"-->
-<!--            android:layout_marginTop="16dp">-->
-
-<!--            <ImageView-->
-<!--                android:contentDescription="@string/facebook_login"-->
-<!--                android:src="@drawable/ic_facebook"-->
-<!--                android:layout_width="40dp"-->
-<!--                android:layout_height="40dp"-->
-<!--                android:layout_margin="12dp"/>-->
-
-<!--            <ImageView-->
-<!--                android:contentDescription="@string/google_login"-->
-<!--                android:src="@drawable/ic_google"-->
-<!--                android:layout_width="40dp"-->
-<!--                android:layout_height="40dp"-->
-<!--                android:layout_margin="12dp"/>-->
-
-<!--            <ImageView-->
-<!--                android:contentDescription="@string/apple_login"-->
-<!--                android:src="@drawable/ic_apple"-->
-<!--                android:layout_width="40dp"-->
-<!--                android:layout_height="40dp"-->
-<!--                android:layout_margin="12dp"/>-->
-<!--        </LinearLayout>-->
     </LinearLayout>
 </RelativeLayout>
