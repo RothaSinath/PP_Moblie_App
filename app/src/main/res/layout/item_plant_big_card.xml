@@ -17,7 +17,8 @@
 
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="180dp">
+            android:layout_height="180dp"
+            android:background="@drawable/bg_button_aqua">
 
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/imgPlant"
@@ -29,13 +30,13 @@
 
             <ImageView
                 android:id="@+id/btnClose"
-                android:layout_width="56dp"
-                android:layout_height="56dp"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
                 android:layout_gravity="top|end"
                 android:layout_marginTop="7dp"
                 android:layout_marginEnd="7dp"
                 android:background="@drawable/bg_white_circle"
-                android:padding="15dp"
+                android:padding="4dp"
                 android:src="@drawable/ic_close_foreground"
                 app:tint="#D71920" />
 

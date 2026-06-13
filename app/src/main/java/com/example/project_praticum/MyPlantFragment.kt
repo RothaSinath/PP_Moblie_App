@@ -28,6 +28,7 @@ class MyPlantFragment : Fragment(R.layout.fragment_my_plant) {
 
     private lateinit var myPlantAdapter: MyPlantAdapter
 
+    private val myPlants = mutableListOf<MyPlantResponse>()
     private val wishlistPlants = mutableListOf<Plant>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -35,24 +36,24 @@ class MyPlantFragment : Fragment(R.layout.fragment_my_plant) {
 
         sessionManager = SessionManager(requireContext())
 
+        bindViews(view)
+        setupRecyclerView()
+        setupActions()
+
+        if (myPlants.isNotEmpty()) {
+            renderMyPlants()
+        } else {
+            loadMyPlants()
+        }
+    }
+
+    private fun bindViews(view: View) {
         edtSearchPlant = view.findViewById(R.id.edtSearchPlant)
         btnWishlistPlant = view.findViewById(R.id.btnWishlistPlant)
         btnMore = view.findViewById(R.id.btnMore)
         recyclerMyPlants = view.findViewById(R.id.recyclerMyPlants)
         tvEmptyPlant = view.findViewById(R.id.tvEmptyPlant)
         btnAddPlant = view.findViewById(R.id.btnAddPlant)
-
-        setupRecyclerView()
-        setupActions()
-        loadMyPlants()
-    }
-
-    override fun onResume() {
-        super.onResume()
-
-        if (::myPlantAdapter.isInitialized) {
-            loadMyPlants()
-        }
     }
 
     private fun setupRecyclerView() {
@@ -94,10 +95,9 @@ class MyPlantFragment : Fragment(R.layout.fragment_my_plant) {
                 val response = ApiClient.apiService.getMyPlants(token)
 
                 if (response.isSuccessful && response.body() != null) {
-                    val items = response.body()!!
-
-                    myPlantAdapter.updateData(items)
-                    tvEmptyPlant.visibility = if (items.isEmpty()) View.VISIBLE else View.GONE
+                    myPlants.clear()
+                    myPlants.addAll(response.body()!!)
+                    renderMyPlants()
                 } else {
                     val error = response.errorBody()?.string()
                     Toast.makeText(
@@ -114,6 +114,11 @@ class MyPlantFragment : Fragment(R.layout.fragment_my_plant) {
                 ).show()
             }
         }
+    }
+
+    private fun renderMyPlants() {
+        myPlantAdapter.updateData(myPlants)
+        tvEmptyPlant.visibility = if (myPlants.isEmpty()) View.VISIBLE else View.GONE
     }
 
     private fun showAddPlantImageDialog() {

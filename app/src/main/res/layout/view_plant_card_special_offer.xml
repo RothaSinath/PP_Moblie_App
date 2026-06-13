@@ -3,12 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="192dp"
-    android:layout_height="272dp"
+    android:layout_height="280dp"
     android:layout_marginEnd="12dp">
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="192dp"
-        android:layout_height="260dp"
+        android:layout_height="280dp"
         app:cardBackgroundColor="@color/dark_teal"
         app:cardCornerRadius="28dp"
         app:cardElevation="6dp"
@@ -114,12 +114,26 @@
                 android:textSize="13sp" />
 
             <TextView
+                android:id="@+id/txtOldPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_above="@id/txtNewPrice"
+                android:layout_marginStart="14dp"
+                android:layout_marginBottom="2dp"
+                android:text="$7.50"
+                android:textColor="#B7D3D3"
+                android:textSize="13sp"
+                android:visibility="gone" />
+
+            <TextView
                 android:id="@+id/txtNewPrice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentBottom="true"
-                android:layout_margin="14dp"
+                android:layout_marginStart="14dp"
+                android:layout_marginBottom="14dp"
                 android:text="$5.75"
                 android:textColor="@android:color/white"
                 android:textSize="20sp"

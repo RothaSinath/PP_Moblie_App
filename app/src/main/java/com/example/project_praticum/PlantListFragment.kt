@@ -19,6 +19,7 @@ class PlantListFragment : Fragment(R.layout.fragment_plant_list) {
     private lateinit var recyclerPlants: RecyclerView
     private lateinit var adapter: PlantBigCardAdapter
 
+    private val plantsCache = mutableListOf<Plant>()
 
     private val category: String by lazy {
         arguments?.getString(ARG_CATEGORY) ?: "All"
@@ -29,11 +30,25 @@ class PlantListFragment : Fragment(R.layout.fragment_plant_list) {
 
         sessionManager = SessionManager(requireContext())
 
-        tvTitle = view.findViewById(R.id.tvTitle)
-        recyclerPlants = view.findViewById(R.id.recyclerPlants)
+        bindViews(view)
+        setupRecyclerView()
+        setupActions(view)
 
         tvTitle.text = category
 
+        if (plantsCache.isNotEmpty()) {
+            adapter.updateData(plantsCache)
+        } else {
+            loadPlants()
+        }
+    }
+
+    private fun bindViews(view: View) {
+        tvTitle = view.findViewById(R.id.tvTitle)
+        recyclerPlants = view.findViewById(R.id.recyclerPlants)
+    }
+
+    private fun setupRecyclerView() {
         adapter = PlantBigCardAdapter(
             items = mutableListOf(),
             showCloseButton = false,
@@ -46,14 +61,14 @@ class PlantListFragment : Fragment(R.layout.fragment_plant_list) {
             }
         )
 
+        recyclerPlants.layoutManager = GridLayoutManager(requireContext(), 2)
+        recyclerPlants.adapter = adapter
+    }
+
+    private fun setupActions(view: View) {
         view.findViewById<ImageView>(R.id.btnBack).setOnClickListener {
             parentFragmentManager.popBackStack()
         }
-
-        recyclerPlants.layoutManager = GridLayoutManager(requireContext(), 2)
-        recyclerPlants.adapter = adapter
-
-        loadPlants()
     }
 
     private fun loadPlants() {
@@ -61,44 +76,79 @@ class PlantListFragment : Fragment(R.layout.fragment_plant_list) {
             try {
                 val response = ApiClient.apiService.getPlants(
                     token = sessionManager.getBearerToken(),
+                    search = null,
                     category = if (category == "Popular" || category == "Special") null else category
                 )
 
                 if (response.isSuccessful && response.body() != null) {
                     val plants = when (category) {
-                        "Popular" -> response.body()!!.sortedByDescending { it.rating ?: 0.0 }
-                        "Special" -> response.body()!!.filter { it.is_special_offer }
+                        "Popular" -> response.body()!!
+                            .sortedByDescending { it.rating ?: 0.0 }
+
+                        "Special" -> response.body()!!
+                            .filter { it.is_special_offer }
+
                         else -> response.body()!!
                     }
 
-                    adapter.updateData(plants)
+                    plantsCache.clear()
+                    plantsCache.addAll(plants)
+
+                    adapter.updateData(plantsCache)
+                } else {
+                    Toast.makeText(
+                        requireContext(),
+                        "Failed to load plants",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             } catch (e: Exception) {
-                Toast.makeText(requireContext(), e.message, Toast.LENGTH_LONG).show()
+                Toast.makeText(
+                    requireContext(),
+                    "Connection error: ${e.message}",
+                    Toast.LENGTH_LONG
+                ).show()
             }
         }
     }
 
-    private fun toggleFavorite(plant: Plant) {
-        val token = sessionManager.getBearerToken() ?: return
-
-        viewLifecycleOwner.lifecycleScope.launch {
-            ApiClient.apiService.toggleWishlist(token, plant.id)
-            loadPlants()
-        }
-    }
-
     private fun addToCart(plant: Plant) {
-        val token = sessionManager.getBearerToken() ?: return
+        val token = sessionManager.getBearerToken()
+
+        if (token == null) {
+            Toast.makeText(requireContext(), "Please login first", Toast.LENGTH_SHORT).show()
+            return
+        }
 
         viewLifecycleOwner.lifecycleScope.launch {
-            ApiClient.apiService.addToCart(token, CartAddRequest(plant.id, 1))
-            Toast.makeText(requireContext(), "Added to cart", Toast.LENGTH_SHORT).show()
+            try {
+                val response = ApiClient.apiService.addToCart(
+                    token,
+                    CartAddRequest(plant.id, 1)
+                )
+
+                if (response.isSuccessful) {
+                    Toast.makeText(requireContext(), "Added to cart", Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(requireContext(), "Failed to add cart", Toast.LENGTH_SHORT).show()
+                }
+            } catch (e: Exception) {
+                Toast.makeText(
+                    requireContext(),
+                    "Connection error: ${e.message}",
+                    Toast.LENGTH_LONG
+                ).show()
+            }
         }
     }
 
     private fun openPlantDetail(id: Int) {
-        val containerId = (requireView().parent as? ViewGroup)?.id ?: return
+        val containerId = (requireView().parent as? ViewGroup)?.id
+
+        if (containerId == null || containerId == View.NO_ID) {
+            Toast.makeText(requireContext(), "Fragment container not found", Toast.LENGTH_SHORT).show()
+            return
+        }
 
         parentFragmentManager.beginTransaction()
             .replace(containerId, PlantDetailFragment.newInstance(id))
@@ -110,11 +160,11 @@ class PlantListFragment : Fragment(R.layout.fragment_plant_list) {
         private const val ARG_CATEGORY = "category"
 
         fun newInstance(category: String): PlantListFragment {
-            val fragment = PlantListFragment()
-            fragment.arguments = Bundle().apply {
-                putString(ARG_CATEGORY, category)
+            return PlantListFragment().apply {
+                arguments = Bundle().apply {
+                    putString(ARG_CATEGORY, category)
+                }
             }
-            return fragment
         }
     }
 }

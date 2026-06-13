@@ -76,9 +76,10 @@ class EditProfileFragment : Fragment(R.layout.fragment_edit_profile) {
 
         if (!avatarUrl.isNullOrBlank()) {
             Glide.with(this)
-                .load(convertLocalhostUrl(avatarUrl) + "?t=${System.currentTimeMillis()}")
+                .load(convertLocalhostUrl(avatarUrl))
                 .placeholder(R.drawable.profile)
                 .error(R.drawable.profile)
+                .circleCrop()
                 .into(imgProfile)
         } else {
             imgProfile.setImageResource(R.drawable.profile)
@@ -143,9 +144,6 @@ class EditProfileFragment : Fragment(R.layout.fragment_edit_profile) {
 
         viewLifecycleOwner.lifecycleScope.launch {
             try {
-                val nameBody = name.toPlainRequestBody()
-                val emailBody = email.toPlainRequestBody()
-
                 val passwordBody = if (password.isNotEmpty()) {
                     password.toPlainRequestBody()
                 } else {
@@ -164,8 +162,8 @@ class EditProfileFragment : Fragment(R.layout.fragment_edit_profile) {
 
                 val response = ApiClient.apiService.updateProfile(
                     token = token,
-                    name = nameBody,
-                    email = emailBody,
+                    name = name.toPlainRequestBody(),
+                    email = email.toPlainRequestBody(),
                     password = passwordBody,
                     passwordConfirmation = confirmPasswordBody,
                     avatar = avatarPart
@@ -173,13 +171,15 @@ class EditProfileFragment : Fragment(R.layout.fragment_edit_profile) {
 
                 if (response.isSuccessful && response.body() != null) {
                     val user = response.body()!!.user
+
                     sessionManager.saveUser(user)
 
                     if (!user.avatar_url.isNullOrBlank()) {
                         Glide.with(this@EditProfileFragment)
-                            .load(convertLocalhostUrl(user.avatar_url) + "?t=${System.currentTimeMillis()}")
+                            .load(convertLocalhostUrl(user.avatar_url))
                             .placeholder(R.drawable.profile)
                             .error(R.drawable.profile)
+                            .circleCrop()
                             .into(imgProfile)
                     }
 
@@ -218,7 +218,7 @@ class EditProfileFragment : Fragment(R.layout.fragment_edit_profile) {
     }
 
     private fun uriToTempFile(uri: Uri): File {
-        val fileName = getFileName(uri)
+        val fileName = getSafeFileName(uri)
         val tempFile = File(requireContext().cacheDir, fileName)
 
         requireContext().contentResolver.openInputStream(uri).use { input ->
@@ -230,7 +230,7 @@ class EditProfileFragment : Fragment(R.layout.fragment_edit_profile) {
         return tempFile
     }
 
-    private fun getFileName(uri: Uri): String {
+    private fun getSafeFileName(uri: Uri): String {
         var fileName = "profile_${System.currentTimeMillis()}.jpg"
 
         val cursor = requireContext().contentResolver.query(uri, null, null, null, null)
@@ -239,7 +239,9 @@ class EditProfileFragment : Fragment(R.layout.fragment_edit_profile) {
             val nameIndex = it.getColumnIndex(OpenableColumns.DISPLAY_NAME)
 
             if (it.moveToFirst() && nameIndex >= 0) {
-                fileName = it.getString(nameIndex)
+                val originalName = it.getString(nameIndex)
+                val extension = originalName.substringAfterLast('.', "jpg")
+                fileName = "profile_${System.currentTimeMillis()}.$extension"
             }
         }
 
@@ -248,7 +250,7 @@ class EditProfileFragment : Fragment(R.layout.fragment_edit_profile) {
 
     private fun convertLocalhostUrl(url: String): String {
         return url
-            .replace("http://127.0.0.1:8000", "http://10.0.2.2:8000")
-            .replace("http://localhost:8000", "http://10.0.2.2:8000")
+            .replace("http://localhost:8000", "http://127.0.0.1:8000")
+            .replace("http://10.0.2.2:8000", "http://127.0.0.1:8000")
     }
 }

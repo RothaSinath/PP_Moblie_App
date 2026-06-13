@@ -1,5 +1,6 @@
 package com.example.project_praticum
 
+import android.graphics.Paint
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -21,6 +22,7 @@ class SpecialOfferAdapter(
         private val imgPlant: ImageView = view.findViewById(R.id.imgPlant)
         private val txtName: TextView = view.findViewById(R.id.txtName)
         private val txtCategory: TextView = view.findViewById(R.id.txtCategory)
+        private val txtOldPrice: TextView = view.findViewById(R.id.txtOldPrice)
         private val txtNewPrice: TextView = view.findViewById(R.id.txtNewPrice)
         private val rating: TextView = view.findViewById(R.id.rating)
         private val ratingCount: TextView = view.findViewById(R.id.number_of_rating)
@@ -30,10 +32,11 @@ class SpecialOfferAdapter(
         fun bind(item: Plant) {
             txtName.text = item.name
             txtCategory.text = item.category?.name ?: "Plant"
-            txtNewPrice.text = "%.2f$".format(item.price)
+            txtNewPrice.text = "$%.2f".format(item.price)
             rating.text = "%.1f".format(item.rating ?: 0.0)
             ratingCount.text = "(${item.rating_count ?: 0})"
 
+            bindOldPrice(item)
             loadPlantImage(imgPlant, item.main_image_url)
 
             btnFavorite.setImageResource(
@@ -46,6 +49,7 @@ class SpecialOfferAdapter(
 
             btnFavorite.setOnClickListener {
                 val position = bindingAdapterPosition
+
                 if (position != RecyclerView.NO_POSITION) {
                     onFavoriteClick(item, position)
                 }
@@ -53,6 +57,19 @@ class SpecialOfferAdapter(
 
             btnAdd.setOnClickListener {
                 onAddCartClick(item)
+            }
+        }
+
+        private fun bindOldPrice(item: Plant) {
+            val oldPrice = item.old_price
+
+            if (oldPrice != null && oldPrice > item.price) {
+                txtOldPrice.visibility = View.VISIBLE
+                txtOldPrice.text = "$%.2f".format(oldPrice)
+                txtOldPrice.paintFlags = txtOldPrice.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+            } else {
+                txtOldPrice.visibility = View.GONE
+                txtOldPrice.paintFlags = txtOldPrice.paintFlags and Paint.STRIKE_THRU_TEXT_FLAG.inv()
             }
         }
     }
@@ -76,6 +93,13 @@ class SpecialOfferAdapter(
         notifyDataSetChanged()
     }
 
+    fun updateFavorite(position: Int, isFavorite: Boolean) {
+        if (position in items.indices) {
+            items[position].is_favorite = isFavorite
+            notifyItemChanged(position)
+        }
+    }
+
     private fun loadPlantImage(imageView: ImageView, imageUrl: String?) {
         val finalUrl = imageUrl?.let { convertLocalhostUrl(it) }
 
@@ -85,6 +109,7 @@ class SpecialOfferAdapter(
             .load(finalUrl)
             .placeholder(R.drawable.ic_logo)
             .error(R.drawable.ic_logo)
+            .fitCenter()
             .into(imageView)
     }
 

@@ -23,7 +23,6 @@ class PlantHorizontalAdapter(
         private val tvPrice: TextView = view.findViewById(R.id.tvPrice)
         private val btnFavorite: ImageView = view.findViewById(R.id.btnFavorite)
         private val btnAdd: TextView = view.findViewById(R.id.btnAdd)
-
         fun bind(item: Plant) {
             tvPlantName.text = item.name
             tvCategory.text = "🪴 ${item.category?.name ?: "Plant"}"

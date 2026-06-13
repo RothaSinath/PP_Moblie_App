@@ -24,11 +24,17 @@ class CategoryPlantAdapter(
         private val txtNewPrice: TextView = view.findViewById(R.id.txtNewPrice)
         private val btnFavorite: ImageView = view.findViewById(R.id.btnFavorite)
         private val btnAdd: ImageButton = view.findViewById(R.id.btnAdd)
+        private val rating: TextView = view.findViewById(R.id.rating)
+        private val ratingCount: TextView = view.findViewById(R.id.number_of_rating)
+
 
         fun bind(item: Plant) {
             txtName.text = item.name
             txtCategory.text = item.category?.name ?: "Plant"
             txtNewPrice.text = "%.2f$".format(item.price)
+
+            rating.text = "%.1f".format(item.rating ?: 0.0)
+            ratingCount.text = "(${item.rating_count ?: 0})"
 
             loadPlantImage(imgPlant, item.main_image_url)
 

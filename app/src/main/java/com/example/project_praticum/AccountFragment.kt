@@ -42,7 +42,7 @@ class AccountFragment : Fragment(R.layout.fragment_account) {
     private var edtConfirmPassword: EditText? = null
     private var btnSave: TextView? = null
 
-    private var didInitialLoad = false
+    private var hasLoadedUserFromApi = false
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -50,19 +50,12 @@ class AccountFragment : Fragment(R.layout.fragment_account) {
         sessionManager = SessionManager(requireContext())
 
         bindViews(view)
-        showLocalUserData()
-        loadUserFromApi()
         setupActions()
+        showLocalUserData()
 
-        didInitialLoad = true
-    }
-
-    override fun onResume() {
-        super.onResume()
-
-        if (didInitialLoad) {
-            showLocalUserData()
+        if (!hasLoadedUserFromApi) {
             loadUserFromApi()
+            hasLoadedUserFromApi = true
         }
     }
 
@@ -154,7 +147,7 @@ class AccountFragment : Fragment(R.layout.fragment_account) {
         val imageView = imgProfile ?: return
 
         if (!avatarUrl.isNullOrBlank()) {
-            val finalUrl = convertLocalhostUrl(avatarUrl) + "?t=${System.currentTimeMillis()}"
+            val finalUrl = convertLocalhostUrl(avatarUrl)
 
             Log.d("AccountProfile", "Loading profile image: $finalUrl")
 
@@ -165,7 +158,6 @@ class AccountFragment : Fragment(R.layout.fragment_account) {
                 .circleCrop()
                 .into(imageView)
         } else {
-            Log.d("AccountProfile", "No avatar url")
             imageView.setImageResource(R.drawable.profile)
         }
     }
@@ -292,6 +284,7 @@ class AccountFragment : Fragment(R.layout.fragment_account) {
             } catch (_: Exception) {
             } finally {
                 sessionManager.clearSession()
+                hasLoadedUserFromApi = false
                 Toast.makeText(requireContext(), "Logged out", Toast.LENGTH_SHORT).show()
                 goToStartUp()
             }

@@ -1,5 +1,6 @@
 package com.example.project_praticum
 
+import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -10,7 +11,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
-import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
@@ -35,6 +35,8 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     private lateinit var tvGreeting: TextView
     private lateinit var edtSearch: EditText
     private lateinit var btnFavoritePage: ImageView
+    private lateinit var btnScan: ImageView
+
 
     private lateinit var sectionSpecial: View
     private lateinit var sectionPopular: View
@@ -55,14 +57,15 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private var selectedFilter = "All"
     private var searchJob: Job? = null
+    private var hasLoadedPlants = false
+    private var hasLoadedProfile = false
 
     private val slideRunnable = object : Runnable {
         override fun run() {
             val adapter = sliderPager.adapter ?: return
 
             if (adapter.itemCount > 0) {
-                val nextItem = (sliderPager.currentItem + 1) % adapter.itemCount
-                sliderPager.currentItem = nextItem
+                sliderPager.currentItem = (sliderPager.currentItem + 1) % adapter.itemCount
             }
 
             handler.postDelayed(this, 3000)
@@ -80,19 +83,30 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         setupFilters(view)
         setupSearch()
         setupActions()
+        gotoScan()
 
         parentFragmentManager.setFragmentResultListener("wishlist_changed", viewLifecycleOwner) { _, _ ->
-            loadPlants()
+            loadPlants(force = true)
         }
 
-        loadProfile()
-        loadPlants()
+        showLocalProfile()
+
+        if (!hasLoadedProfile) {
+            loadProfileFromApi()
+            hasLoadedProfile = true
+        }
+
+        if (!hasLoadedPlants) {
+            loadPlants()
+            hasLoadedPlants = true
+        } else {
+            renderPlants()
+        }
     }
 
     override fun onResume() {
         super.onResume()
-        loadProfile()
-        loadPlants()
+        handler.removeCallbacks(slideRunnable)
         handler.postDelayed(slideRunnable, 3000)
     }
 
@@ -101,12 +115,19 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         handler.removeCallbacks(slideRunnable)
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        handler.removeCallbacks(slideRunnable)
+        searchJob?.cancel()
+    }
+
     private fun bindViews(view: View) {
         sliderPager = view.findViewById(R.id.sliderPager)
         imgProfile = view.findViewById(R.id.imgProfile)
         tvGreeting = view.findViewById(R.id.tvGreeting)
         edtSearch = view.findViewById(R.id.edtSearch)
         btnFavoritePage = view.findViewById(R.id.btnFavoritePage)
+        btnScan = view.findViewById(R.id.btnScan)
 
         sectionSpecial = view.findViewById(R.id.sectionSpecial)
         sectionPopular = view.findViewById(R.id.sectionPopular)
@@ -166,6 +187,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             LinearLayoutManager.HORIZONTAL,
             false
         )
+
         recycler.adapter = adapter
         recycler.clipToPadding = false
         recycler.clipChildren = false
@@ -268,7 +290,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                 searchJob?.cancel()
                 searchJob = viewLifecycleOwner.lifecycleScope.launch {
                     delay(300)
-                    loadPlants()
+                    loadPlants(force = true)
                 }
             }
 
@@ -282,16 +304,21 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         }
     }
 
-    private fun loadProfile() {
+    private fun gotoScan(){
+        btnScan.setOnClickListener {
+            val intent = Intent(requireContext(), ScanActivity::class.java)
+            startActivity(intent)
+        }
+    }
+
+    private fun showLocalProfile() {
         val name = sessionManager.getUserName()
         val avatarUrl = sessionManager.getUserAvatarUrl()
 
         tvGreeting.text = "Hi! $name"
 
         if (!avatarUrl.isNullOrBlank()) {
-            val finalUrl = convertLocalhostUrl(avatarUrl) + "?t=${System.currentTimeMillis()}"
-
-            Log.d("ProfileImage", "Loading profile: $finalUrl")
+            val finalUrl = convertLocalhostUrl(avatarUrl)
 
             Glide.with(imgProfile.context)
                 .load(finalUrl)
@@ -302,8 +329,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         } else {
             imgProfile.setImageResource(R.drawable.profile)
         }
-
-        loadProfileFromApi()
     }
 
     private fun loadProfileFromApi() {
@@ -317,11 +342,9 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                     val user = response.body()!!
                     sessionManager.saveUser(user)
 
-                    val finalUrl = user.avatar_url
-                        ?.let { convertLocalhostUrl(it) }
-                        ?.plus("?t=${System.currentTimeMillis()}")
+                    tvGreeting.text = "Hi! ${user.name}"
 
-                    Log.d("ProfileImage", "API profile: $finalUrl")
+                    val finalUrl = user.avatar_url?.let { convertLocalhostUrl(it) }
 
                     Glide.with(imgProfile.context)
                         .load(finalUrl)
@@ -336,7 +359,12 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         }
     }
 
-    private fun loadPlants() {
+    private fun loadPlants(force: Boolean = false) {
+        if (!force && allPlants.isNotEmpty()) {
+            renderPlants()
+            return
+        }
+
         viewLifecycleOwner.lifecycleScope.launch {
             try {
                 val response = ApiClient.apiService.getPlants(
@@ -454,10 +482,18 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                         Toast.LENGTH_SHORT
                     ).show()
                 } else {
-                    Toast.makeText(requireContext(), "Failed to update favorite", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        requireContext(),
+                        "Failed to update favorite",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             } catch (e: Exception) {
-                Toast.makeText(requireContext(), "Connection error: ${e.message}", Toast.LENGTH_LONG).show()
+                Toast.makeText(
+                    requireContext(),
+                    "Connection error: ${e.message}",
+                    Toast.LENGTH_LONG
+                ).show()
             }
         }
     }
